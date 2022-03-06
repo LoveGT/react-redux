@@ -7,9 +7,8 @@ import Center from "../../views/Center";
 import FilmsDetail from "../../views/FilmsDetail";
 import NotFound from "../../views/NotFound";
 import Login from "../../views/Login";
-import City from "../../views/City";
-import { isAuth } from "../../utils/auth";
 
+import { isAuth } from "../../utils/auth";
 
 export default function indexRouter(props) {
   return (
@@ -18,8 +17,6 @@ export default function indexRouter(props) {
       <Switch>
         <Route path="/films" component={Films}></Route>
         <Route path="/cinemas" component={Cineamas}></Route>
-        <Route path="/city" component={City}></Route>
-        
         {/* <Route path="/center" component={Center}></Route> */}
         <Route
           path="/center"
