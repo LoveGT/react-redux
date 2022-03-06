@@ -11,10 +11,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-<<<<<<< HEAD
     "react-router-dom": "^5.3.0",
-=======
->>>>>>> be65736e2e954a76d71a812232ea2c24f7b7450a
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
