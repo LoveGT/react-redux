@@ -1,0 +1,9 @@
+.navBar {
+  display: flex;
+  height: 49px;
+  line-height: 49px;
+}
+.navBar .navItem {
+  flex: 1;
+  text-align: center;
+}
