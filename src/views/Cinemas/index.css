@@ -1,0 +1,22 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cinemas-list li{
+  display: flex;
+  flex-flow: column wrap;
+  font-size: 16px;
+  color: orange;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid springgreen;
+  border-radius: 5px;
+}
+.cinemas-list li span{
+  font-size: 14px;
+  color: rgb(182, 200, 216);
+  margin-top: 5px;
+  font-weight: normal;
+}

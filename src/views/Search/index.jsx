@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState, useMemo } from "react";
 import store from "../../redux/store";
 
 import { getCinemaListAction } from "../../redux/actionCreator/getCinemaListAction";
 
-import "./index.css";
-
-export default function Cinemas(props) {
-  console.log(props, 'props')
-  // const [cityName, setCityName] = useState("北京");
-  const [cityName] = useState(store.getState().cityReducer.city);
-
+export default function Search() {
   const [cinemaList, setCinemaList] = useState(
     store.getState().cinemaListReducer.cinemaList
   );
+
+  const [myText, setMyText] = useState("");
 
   useEffect(() => {
     if (store.getState().cinemaListReducer.cinemaList.length === 0) {
@@ -32,24 +29,28 @@ export default function Cinemas(props) {
       unSubscribe();
     };
   }, []);
+  const getCinemaList = useMemo(() =>
+    cinemaList.filter(
+      (item) =>
+        item.name.toUpperCase().includes(myText.toUpperCase()) ||
+        item.address.toUpperCase().includes(myText.toUpperCase())
+    )
+  );
 
-  const handleToCity = () => {
-    props.history.push("/city");
+  const handleChange = (evt) => {
+    setMyText(evt.target.value);
   };
-
-  const handleSearch = () => {
-    props.history.push('/cinemas/search')
-  }
   return (
-    <div>
-      <div className="topbar">
-        <div className="cinemas" onClick={handleToCity}>
-          {cityName}
-        </div>
-        <div className="search" onClick={handleSearch}>搜索</div>
+    <div className="search">
+      <div className="topbar" style={{ justifyContent: "center" }}>
+        <input
+          type="text"
+          value={myText}
+          onChange={(evt) => handleChange(evt)}
+        />
       </div>
       <ul className="cinemas-list">
-        {cinemaList.map((item) => {
+        {getCinemaList.map((item) => {
           return (
             <li key={item.cinemaId}>
               {item.name}

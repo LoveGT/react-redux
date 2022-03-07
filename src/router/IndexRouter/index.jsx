@@ -8,6 +8,8 @@ import FilmsDetail from "../../views/FilmsDetail";
 import NotFound from "../../views/NotFound";
 import Login from "../../views/Login";
 import City from "../../views/City";
+import Search from "../../views/Search";
+
 import { isAuth } from "../../utils/auth";
 
 
@@ -17,7 +19,8 @@ export default function indexRouter(props) {
       {props.children}
       <Switch>
         <Route path="/films" component={Films}></Route>
-        <Route path="/cinemas" component={Cineamas}></Route>
+        <Route path="/cinemas" component={Cineamas} exact></Route>
+        <Route path="/cinemas/Search" component={Search}></Route>
         <Route path="/city" component={City}></Route>
         
         {/* <Route path="/center" component={Center}></Route> */}

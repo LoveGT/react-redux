@@ -8,13 +8,13 @@ import "./App.css";
 function App() {
   const [show, setShow] = useState(true)
   useEffect(() => {
-    console.log(store.getState(), 'store.getState()')
+    // console.log(store.getState(), 'store.getState()')
     store.subscribe(() => {
       setShow(store.getState().tabbarReducer.show)
     })
   }, [])
   return (
-    <div>
+    <div className="app">
       <IndexRouter>
         {show && <TabBar></TabBar>}
       </IndexRouter>
