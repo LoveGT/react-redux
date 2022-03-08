@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import { connect } from "react-redux";
+import store from "../../redux/store";
 
- function City(props) {
+export default function City(props) {
   const [list] = useState(["北京", "上海", "深圳", "广州"]);
   const handleChangeCity = (city) => {
     return () => {
-      props.change(city)
+      store.dispatch({
+        type: "change-city",
+        payload: city,
+      });
       props.history.push("/cinemas");
     };
   };
@@ -22,12 +25,3 @@ import { connect } from "react-redux";
     </div>
   );
 }
-
-export default connect(null,{
-  change(city) {
-    return {
-      type: "change-city",
-        payload: city,
-    }
-  }
-})(City)

@@ -1,52 +1,39 @@
-import React, { useEffect, useState } from "react";
-import store from "../../redux/store";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
 import { getCinemaListAction } from "../../redux/actionCreator/getCinemaListAction";
 
 import "./index.css";
 
-export default function Cinemas(props) {
-  console.log(props, 'props')
-  // const [cityName, setCityName] = useState("北京");
-  const [cityName] = useState(store.getState().cityReducer.city);
-
-  const [cinemaList, setCinemaList] = useState(
-    store.getState().cinemaListReducer.cinemaList
-  );
-
+function Cinemas(props) {
+  console.log(props, "props");
+  const {cinemaList, cityName, getCinemaListAction, history} = props
   useEffect(() => {
-    if (store.getState().cinemaListReducer.cinemaList.length === 0) {
+    if (cinemaList.length === 0) {
       // 去后台拿数据
       // actionCreator里写异步
-      store.dispatch(getCinemaListAction());
+      getCinemaListAction();
     } else {
       console.log("store缓存");
     }
-
-    // 订阅
-    let unSubscribe = store.subscribe(() => {
-      setCinemaList(store.getState().cinemaListReducer.cinemaList);
-    });
-    return () => {
-      //取消订阅
-      unSubscribe();
-    };
-  }, []);
+  }, [cinemaList, getCinemaListAction]);
 
   const handleToCity = () => {
-    props.history.push("/city");
+    history.push("/city");
   };
 
   const handleSearch = () => {
-    props.history.push('/cinemas/search')
-  }
+    history.push("/cinemas/search");
+  };
   return (
     <div>
       <div className="topbar">
         <div className="cinemas" onClick={handleToCity}>
           {cityName}
         </div>
-        <div className="search" onClick={handleSearch}>搜索</div>
+        <div className="search" onClick={handleSearch}>
+          搜索
+        </div>
       </div>
       <ul className="cinemas-list">
         {cinemaList.map((item) => {
@@ -61,3 +48,17 @@ export default function Cinemas(props) {
     </div>
   );
 }
+//将要传给子组件的state映射成属性
+const mapStateToProps = (state) => {
+  return {
+    cityName: state.cityReducer.city,
+    cinemaList: state.cinemaListReducer.cinemaList,
+  };
+};
+
+//将要传给子组件的回调函数映射成属性
+const mapDisPatchToProps = {
+  getCinemaListAction
+};
+
+export default connect(mapStateToProps, mapDisPatchToProps)(Cinemas);
