@@ -1,5 +1,3 @@
-export function isAuth(flag = 0) {
-  console.log(flag, "flag");
-  flag =  localStorage.getItem('auth')
-  return flag;
+export function isAuth(flag = 1) {
+  return flag===1 ? true : false;
 }

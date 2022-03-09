@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { hide, show } from "../../redux/actionCreator/tabbarActionCreator";
 class FilmsDetail extends Component {
   componentDidMount() {
+    console.log(this.props, 'prosp')
     this.props.hide();
   }
   componentWillUnmount() {
